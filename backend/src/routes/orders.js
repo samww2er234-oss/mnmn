@@ -9,7 +9,7 @@ function genOrderNumber() {
 // Customer: create order (checkout)
 router.post('/', verifyToken, async (req, res) => {
   try {
-    const { items, deliveryAddress, paymentMethod, couponCode, deliverySlot, customerNotes, deliveryFee } = req.body;
+    const { items, deliveryAddress, paymentMethod, couponCode, deliverySlot, customerNotes, deliveryFee, customerName, customerPhone } = req.body;
     let subtotal = 0;
     const orderItemsData = [];
     for (const it of items) {
@@ -36,6 +36,7 @@ router.post('/', verifyToken, async (req, res) => {
       customerId: req.user.type === 'customer' ? req.user.id : null,
       subtotal, deliveryFee: deliveryFee || 0, discount, total,
       paymentMethod, deliverySlot, customerNotes,
+      customerName, customerPhone,
       deliveryAddressSnapshot: deliveryAddress,
       couponId: coupon ? coupon.id : null,
     });
