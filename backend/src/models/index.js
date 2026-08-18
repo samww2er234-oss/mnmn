@@ -26,7 +26,7 @@ const Customer = sequelize.define('Customer', {
 // ==== Address ====
 const Address = sequelize.define('Address', {
   id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
-  label: DataTypes.STRING, // منزل / عمل
+  label: DataTypes.STRING,
   fullAddress: DataTypes.STRING,
   lat: DataTypes.FLOAT,
   lng: DataTypes.FLOAT,
@@ -60,7 +60,7 @@ const Product = sequelize.define('Product', {
   images: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: [] },
   price: DataTypes.FLOAT,
   discountPrice: DataTypes.FLOAT,
-  unit: DataTypes.STRING, // كغم/غرام/لتر/حبة
+  unit: DataTypes.STRING,
   stockQty: { type: DataTypes.INTEGER, defaultValue: 0 },
   reorderLevel: { type: DataTypes.INTEGER, defaultValue: 5 },
   productionDate: DataTypes.DATEONLY,
@@ -72,7 +72,7 @@ const Product = sequelize.define('Product', {
   allergens: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: [] },
   countryOfOrigin: DataTypes.STRING,
   brand: DataTypes.STRING,
-  variants: { type: DataTypes.JSONB, defaultValue: [] }, // [{size, weight, flavor, price}]
+  variants: { type: DataTypes.JSONB, defaultValue: [] },
   status: { type: DataTypes.ENUM('available','unavailable','coming_soon'), defaultValue: 'available' },
   tags: { type: DataTypes.ARRAY(DataTypes.STRING), defaultValue: [] },
   rating: { type: DataTypes.FLOAT, defaultValue: 0 },
@@ -95,7 +95,7 @@ const Coupon = sequelize.define('Coupon', {
 const Banner = sequelize.define('Banner', {
   id: { type: DataTypes.UUID, defaultValue: DataTypes.UUIDV4, primaryKey: true },
   image: DataTypes.STRING,
-  linkType: DataTypes.STRING, // product/category/url
+  linkType: DataTypes.STRING,
   linkValue: DataTypes.STRING,
   sortOrder: { type: DataTypes.INTEGER, defaultValue: 0 },
   isActive: { type: DataTypes.BOOLEAN, defaultValue: true },
@@ -152,6 +152,14 @@ const DeliveryZone = sequelize.define('DeliveryZone', {
   estimatedMinutes: DataTypes.INTEGER,
 });
 
+// ==== Setting (اسم المتجر) ====
+const Setting = sequelize.define('Setting', {
+  id: { type: DataTypes.INTEGER, primaryKey: true, defaultValue: 1 },
+  storeName: { type: DataTypes.STRING, defaultValue: 'متجرنا' },
+  logo: DataTypes.STRING,
+  currency: { type: DataTypes.STRING, defaultValue: 'د.ع' },
+});
+
 // ================= Associations =================
 Category.hasMany(Category, { as: 'children', foreignKey: 'parentId' });
 Category.hasMany(Product, { foreignKey: 'categoryId' });
@@ -175,5 +183,5 @@ Review.belongsTo(Customer, { foreignKey: 'customerId' });
 
 module.exports = {
   sequelize, User, Customer, Address, Category, Supplier, Product,
-  Coupon, Banner, Order, OrderItem, DeliveryPerson, Review, DeliveryZone,
+  Coupon, Banner, Order, OrderItem, DeliveryPerson, Review, DeliveryZone, Setting,
 };
