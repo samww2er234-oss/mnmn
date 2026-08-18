@@ -20,6 +20,7 @@ app.use('/api/banners', require('./routes/banners'));
 app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/delivery', require('./routes/delivery'));
+app.use('/api/setup', require('./routes/setup'));
 
 app.get('/', (req, res) => res.json({ status: 'ok', message: 'Food Store API is running' }));
 
