@@ -21,6 +21,7 @@ app.use('/api/reviews', require('./routes/reviews'));
 app.use('/api/dashboard', require('./routes/dashboard'));
 app.use('/api/delivery', require('./routes/delivery'));
 app.use('/api/setup', require('./routes/setup'));
+app.use('/api/upload', require('./routes/upload'));
 
 app.get('/', (req, res) => res.json({ status: 'ok', message: 'Food Store API is running' }));
 
