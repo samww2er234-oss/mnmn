@@ -114,6 +114,8 @@ const Order = sequelize.define('Order', {
   paymentStatus: { type: DataTypes.ENUM('unpaid','paid','refunded'), defaultValue: 'unpaid' },
   deliverySlot: DataTypes.STRING,
   customerNotes: DataTypes.TEXT,
+  customerName: DataTypes.STRING,
+  customerPhone: DataTypes.STRING,
   deliveryAddressSnapshot: DataTypes.JSONB,
 });
 
